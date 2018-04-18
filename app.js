@@ -4,10 +4,22 @@ var http = require('http').Server(app)
 var io = require('socket.io')(http)
 var path = require('path');
 
-app.use(express.static(path.join(__dirname,"public"))); // 정적 세팅
+//app.use(express.static('public'));
+
+
+
+app.use(express.static(path.join(__dirname,"public")));
+
+var router = require('./routes/index')(express, http, io, path);
+app.use('/', router);
+app.get('/test',(req,res)=>{
+  res.send('test');
+})
+
 
 var objects = {};
 
+var io = require('socket.io')(http)
 io.on('connection', (socket)=>{
   console.log('user connected: ', socket.id);
   objects[socket.id] = new UserObject();
@@ -65,14 +77,5 @@ function UserObject(){
   this.keypress = [];
 }
 
-
-
-
-
-
-
-
-
-
 var port = process.env.PORT || 3131;
-http.listen(port); // 소켓이라서..
+http.listen(3131); // 소켓이라서..
