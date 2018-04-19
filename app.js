@@ -14,8 +14,10 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 
+app.get('/',(req,res)=>{ res.render('main.html') })
 
 var router = require('./routes/index')(express, http, io, path);
+
 app.use('/', router);
 
 

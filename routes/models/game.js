@@ -1,6 +1,6 @@
-module.exports = (router, http, io, path)=>{
-  router.get('/',(req,res)=>{
-    res.render('index.html');
+module.exports = (router,express, path)=>{
+  router.get('/', (req,res)=>{
+    res.render('game1.html');
   })
   return router;
 }

@@ -1,10 +1,9 @@
 module.exports = (express, router,  http, io, path)=>{
   var router = express.Router();
   var auth = require('./models/auth')(router, express, path);
-  var game = require('./models/game')(router, http, io, path);
-  router.get('/', (req,res)=>{res.send('asd')})
+  var game = require('./models/game')(router, express, path);
 
-  router.use('/auth', auth);
   router.use('/game', game);
+  router.use('/auth', auth);
   return router;
 }
