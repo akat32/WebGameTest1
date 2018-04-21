@@ -4,19 +4,18 @@ var http = require('http').Server(app)
 var io = require('socket.io')(http)
 const cors = require('cors');
 const path = require('path');
+var fs = require('fs');
 
-//app.use(express.static('public'));
 
 app.use(cors());
-app.use(express.static('public')); // fuck;;;
+app.use(express.static('public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 
-app.get('/',(req,res)=>{ res.render('main.html') })
 
-var router = require('./routes/index')(express, http, io, path);
+var router = require('./routes/index')(express, fs,path);
 
 app.use('/', router);
 
